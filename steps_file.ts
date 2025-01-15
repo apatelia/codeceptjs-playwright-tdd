@@ -1,7 +1,7 @@
 // in this file you can append custom step methods to 'I' object
 
-// eslint-disable-next-line @typescript-eslint/explicit-function-return-type 
-export = function() {
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+export = function () {
   return actor({
 
     // Define custom steps here, use 'this' to access default methods of I.

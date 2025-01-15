@@ -6,33 +6,33 @@ class CartPage {
   readonly continueShoppingButton: CodeceptJS.LocatorOrString;
   readonly checkoutButton: CodeceptJS.LocatorOrString;
 
-  constructor() {
+  constructor () {
     this.cartHeading = "span[data-test='title']";
     this.allProductsInCart = "div.cart_item";
     this.continueShoppingButton = "button#continue-shopping";
     this.checkoutButton = "button#checkout";
   }
 
-  private findProductByName(productName: string): CodeceptJS.Locator {
+  private findProductByName (productName: string): CodeceptJS.Locator {
     return locate("div.cart_item").withDescendant("div.inventory_item_name ").withText(productName);
   }
 
-  removeProductFromCart(productName: string): void {
+  removeProductFromCart (productName: string): void {
     const product = this.findProductByName(productName);
 
     const removeButton = product.find("button");
     I.click(removeButton);
   }
 
-  async getProductPrice(productName: string): Promise<string> {
+  async getProductPrice (productName: string): Promise<string> {
     const product = this.findProductByName(productName);
     const productPrice = await I.grabTextFrom(product.find("div.inventory_item_price"));
 
     return `${productPrice}`;
   }
 
-  async getProductQuantity(productName: string): Promise<number> {
-    const product = locate("div.cart_item").withDescendant("div.inventory_item_name").withText(productName);
+  async getProductQuantity (productName: string): Promise<number> {
+    const product = this.findProductByName(productName);
     const quantity = await I.grabTextFrom(product.find("div.cart_quantity"));
 
     return quantity === "" ? 0 : +quantity;

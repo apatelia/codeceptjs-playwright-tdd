@@ -6,22 +6,22 @@ class Footer {
   private readonly linkedInLink: CodeceptJS.LocatorOrString;
   private readonly copyrightText: CodeceptJS.LocatorOrString;
 
-  constructor() {
+  constructor () {
     this.twitterLink = "a[data-test='social-twitter']";
     this.facebookLink = "a[data-test='social-facebook']";
     this.linkedInLink = "a[data-test='social-linkedin']";
     this.copyrightText = "div.footer_copy";
   }
 
-  clickTwitterLink(): void {
+  clickTwitterLink (): void {
     I.click(this.twitterLink);
   }
 
-  clickFacebookLink(): void {
+  clickFacebookLink (): void {
     I.click(this.facebookLink);
   }
 
-  clickLinkedInLink(): void {
+  clickLinkedInLink (): void {
     I.click(this.linkedInLink);
   }
 }

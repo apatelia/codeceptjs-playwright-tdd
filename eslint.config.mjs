@@ -1,12 +1,12 @@
-import globals from "globals";
-import pluginJs from "@eslint/js";
-import teslint from "typescript-eslint";
+import eslintJs from "@eslint/js";
+import stylistic from "@stylistic/eslint-plugin";
 import unusedImports from "eslint-plugin-unused-imports";
-import deprecated from "eslint-plugin-deprecate";
+import globals from "globals";
+import teslint from "typescript-eslint";
 
 export default [
   {
-    files: [ "**/*.{js, ts}" ]
+    files: [ "**/*.{js,ts}" ]
   },
   {
     ignores: [
@@ -18,43 +18,55 @@ export default [
   },
   {
     languageOptions: {
-      globals: globals.browser,
+      globals: globals.node,
       parserOptions: {
         projectService: true,
         tsconfigRootDir: import.meta.dirname
       }
     }
   },
-  pluginJs.configs.recommended,
+  eslintJs.configs.recommended,
   ...teslint.configs.recommended,
   ...teslint.configs.stylistic,
   {
     plugins: {
+      "@stylistic": stylistic,
       "unused-imports": unusedImports,
-      "deprecated": deprecated,
     }
   },
   {
     rules: {
-      quotes: [ "error", "double" ],
-      semi: [ "error", "always" ],
-      "one-var-declaration-per-line": [ "error", "always" ],
-      "no-unused-vars": "error",
-      camelcase: "error",
-      eqeqeq: "error",
+      "no-unused-vars": "off",
+      "eqeqeq": [ "error", "smart" ],
       "no-console": "error",
-      "array-bracket-spacing": [ "error", "always" ],
-      "object-curly-spacing": [ "error", "always" ],
-      "comma-dangle": [ "error", "always-multiline" ],
-      "eol-last": [ "error", "always" ],
+      "no-warning-comments": "warn",
+      "unused-imports/no-unused-imports": "error",
+      "@stylistic/quotes": [ "error", "double" ],
+      "@stylistic/semi": [ "error", "always" ],
+      "@stylistic/one-var-declaration-per-line": [ "error", "always" ],
+      "@stylistic/object-curly-spacing": [ "error", "always" ],
+      "@stylistic/indent": [ "error", 2 ],
+      "@stylistic/linebreak-style": [ "error", "unix" ],
+      "@stylistic/no-trailing-spaces": "error",
+      "@stylistic/array-bracket-newline": [ "error", { "multiline": true } ],
+      "@stylistic/array-bracket-spacing": [ "error", "always" ],
+      "@stylistic/block-spacing": [ "error", "always" ],
+      "@stylistic/space-before-function-paren": "error",
+      "@stylistic/comma-dangle": [ "error", "only-multiline" ],
+      "@stylistic/comma-spacing": [ "error", { "before": false, "after": true } ],
+      "@stylistic/eol-last": [ "error", "always" ],
       "@typescript-eslint/no-floating-promises": "error",
-      "@typescript-eslint/consistent-type-definitions": "error",
+      "@typescript-eslint/await-thenable": "error",
       "@typescript-eslint/explicit-function-return-type": "error",
       "@typescript-eslint/no-deprecated": "error",
-      "@typescript-eslint/unified-signatures": "error",
-      "@typescript-eslint/no-require-imports": "error",
-      "unused-imports/no-unused-imports": "error",
-      "@typescript-eslint/await-thenable": "error",
+      "@typescript-eslint/no-unused-vars": [
+        "error",
+        {
+          "vars": "all",
+          "args": "all",
+          "caughtErrors": "all",
+        }
+      ],
     }
   }
 ];

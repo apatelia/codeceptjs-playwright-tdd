@@ -11,12 +11,33 @@ export const config: CodeceptJS.MainConfig = {
   output: "./output",
   helpers: {
     Playwright: {
-      browser: "chromium",
       url: "https://www.saucedemo.com",
       trace: true,
     },
     ChaiWrapper: {
       require: "codeceptjs-chai",
+    },
+  },
+  multiple: {
+    chromium: {
+      browsers: [
+        {
+          browser: "chromium",
+          desiredCapabilities: {
+            // override capabilities related to chromium
+          },
+        },
+      ],
+    },
+    firefox: {
+      browsers: [
+        {
+          browser: "firefox",
+          desiredCapabilities: {
+            // override capabilities related to firefox
+          },
+        },
+      ],
     },
   },
   include: {
